@@ -26,7 +26,6 @@ public class Task2Tests {
         driver.get(URL);
 
     }
-    @Test
 
 
     @AfterMethod
