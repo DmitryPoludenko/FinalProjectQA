@@ -24,9 +24,12 @@ public class Task2Tests {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(URL);
-
     }
 
+    @Test
+    public void checkValuesFootballMatches() {
+
+    }
 
     @AfterMethod
     public void tearDown() {
