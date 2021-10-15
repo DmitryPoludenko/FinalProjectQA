@@ -1,11 +1,11 @@
 
-V
-&src/main/java/BBC2/task1/BasePage.java,9\b\9b19d5d274271f3645f8448eb77de9f8ab95065d
-`
-0src/main/java/LoremIpsumTest/task1/BasePage.java,8\e\8e1d1a12339b18b97b139a3ea12573a51d589b04
 m
 =src/test/java/LoremIpsumTest/task2/part1/LoremIpsumTests.java,0\9\0994d20a6be943c8c75da4cc874bc4dfc6faebc4
 h
 8src/test/java/LoremIpsumTest/task1/part1/TestsPart1.java,a\2\a28c801a553d868d30792ef2827774254e617a15
 h
 8src/test/java/LoremIpsumTest/task1/part2/TestsPart2.java,b\2\b2ac1dff72a865926ff8800344bea47ad7c5fc4c
+C
+BBC2Task2Tests.html,7\a\7af3647e3e346ab8ccb9a947dcc92961663ad63b
+\
+,src/test/java/BBC2Test/task1/Task1Tests.java,6\7\67e5cb073eead714561e391e4aac1ef014ff00cf

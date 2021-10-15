@@ -1,6 +1,7 @@
 package BBC1Test.task2;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,6 +12,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
+//import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
@@ -34,6 +36,11 @@ public class Task2Tests {
 
     }
 
+    @AfterMethod
+    public void tearDown() {
+        driver.close();
+    }
+
     @Test
     public void testCheckingCanBeBlankField() {
 
@@ -41,7 +48,7 @@ public class Task2Tests {
                 .timeouts()
                 .implicitlyWait(30, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//li[@class='orb-nav-newsdotcom']")).click();
-        if (driver.findElement(By.xpath("//div[@class='tp-iframe-wrapper tp-active']")).isDisplayed()) {
+        if (isElementPresented(By.xpath("//div[@class='tp-iframe-wrapper tp-active']"))) {
             driver.findElement(By.xpath("//button[@class='tp-close tp-active']")).click();
         }
         driver.findElement(By.xpath("//a[@class = 'nw-o-link']/ span[text() = 'Coronavirus']")).click();
@@ -56,12 +63,31 @@ public class Task2Tests {
         driver.findElement(By.xpath("//input[@type='checkbox']")).click();
 
         driver.findElement(By.xpath("//button[text() = 'Submit']")).click();
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='input-error-message']")).isDisplayed());
+        Assert.assertTrue(isElementPresented(By.xpath("//div[@class='input-error-message']")));
 
         List<WebElement> warningsList = driver.findElements(By.xpath("//div[@class='input-error-message']"));
         Assert.assertEquals(warningsList.size(), 2);
     }
 
+    @Test
+    public void testCorrectlyTyping() {
+        driver.manage()
+                .timeouts()
+                .implicitlyWait(30, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//li[@class='orb-nav-newsdotcom']")).click();
+        if (isElementPresented(By.xpath("//div[@class='tp-iframe-wrapper tp-active']"))) {
+            driver.findElement(By.xpath("//button[@class='tp-close tp-active']")).click();
+        }
+        driver.findElement(By.xpath("//a[@class = 'nw-o-link']/ span[text() = 'Coronavirus']")).click();
+
+        driver.findElement(By.xpath("//a[@class = 'nw-o-link']/ span[text() = 'Your Coronavirus Stories']")).click();
+        driver.findElement(By.xpath("//a[@href='/news/52143212']")).click();
+        driver.findElement(By.xpath("//input[@aria-label='Email address']"))
+                .sendKeys("someMail@mail.ua");
+        driver.findElement(By.xpath("//button[text() = 'Submit']")).click();
+        Assert.assertFalse(isElementPresented(By.xpath("//div[contains(text(),'Email')]")));
+
+    }
 
     @Test
     public void testCheckingCanBeBlankField2() {
@@ -70,7 +96,7 @@ public class Task2Tests {
                 .timeouts()
                 .implicitlyWait(30, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//li[@class='orb-nav-newsdotcom']")).click();
-        if (driver.findElement(By.xpath("//div[@class='tp-iframe-wrapper tp-active']")).isDisplayed()) {
+        if (isElementPresented(By.xpath("//div[@class='tp-iframe-wrapper tp-active']"))) {
             driver.findElement(By.xpath("//button[@class='tp-close tp-active']")).click();
         }
         driver.findElement(By.xpath("//a[@class = 'nw-o-link']/ span[text() = 'Coronavirus']")).click();
@@ -85,7 +111,7 @@ public class Task2Tests {
                 .sendKeys("!@!@$!!!!#!$!!");
 
         driver.findElement(By.xpath("//button[text() = 'Submit']")).click();
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='input-error-message']")).isDisplayed());
+        Assert.assertTrue(isElementPresented(By.xpath("//div[@class='input-error-message']")));
 
         List<WebElement> warningsList = driver.findElements(By.xpath("//div[@class='input-error-message']"));
         Assert.assertEquals(warningsList.size(), 2);
@@ -99,7 +125,7 @@ public class Task2Tests {
                 .timeouts()
                 .implicitlyWait(30, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//li[@class='orb-nav-newsdotcom']")).click();
-        if (driver.findElement(By.xpath("//div[@class='tp-iframe-wrapper tp-active']")).isDisplayed()) {
+        if (isElementPresented(By.xpath("//div[@class='tp-iframe-wrapper tp-active']"))) {
             driver.findElement(By.xpath("//button[@class='tp-close tp-active']")).click();
         }
         driver.findElement(By.xpath("//a[@class = 'nw-o-link']/ span[text() = 'Coronavirus']")).click();
@@ -114,14 +140,21 @@ public class Task2Tests {
                 .sendKeys("!@!@$!!!!#!$!!");
 
         driver.findElement(By.xpath("//button[text() = 'Submit']")).click();
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='input-error-message']")).isDisplayed());
+        Assert.assertTrue(isElementPresented(By.xpath("//div[@class='input-error-message']")));
 
         List<WebElement> warningsList = driver.findElements(By.xpath("//div[@class='input-error-message']"));
         Assert.assertEquals(warningsList.size(), 1);
     }
 
-    @AfterMethod
-    public void tearDown() {
-        driver.close();
+    protected Boolean isElementPresented(By element) {
+        boolean elementCondition = false;
+        try {
+            elementCondition = driver.findElement(element).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return elementCondition;
+        }
+        return elementCondition;
     }
+
+
 }
