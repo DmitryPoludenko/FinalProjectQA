@@ -2,8 +2,11 @@ package BBC.task3;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -20,15 +23,15 @@ public class BasePage {
         driver.manage().timeouts().implicitlyWait(timeToWait, SECONDS);
     }
 
-    public void waitForPageLoadComplete(long timeToWait) {
-        new WebDriverWait(driver, timeToWait).until(
-                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+    public void waitForPageLoadComplete(long timeToWait, WebElement element) {
+        new WebDriverWait(driver, timeToWait).until(ExpectedConditions.visibilityOfAllElements(element));
     }
 
-    public void waitVisibilityOfElement(long timeToWait, By locator) {
+    public void waitVisibilityOfElement(long timeToWait, WebElement locator) {
         WebDriverWait wait = new WebDriverWait(driver, timeToWait);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.visibilityOf(locator));
     }
+
 
     public Boolean isElementPresented(WebElement element) {
         boolean elementCondition = false;
@@ -39,4 +42,12 @@ public class BasePage {
         }
         return elementCondition;
     }
+
+
+    public void waitForLoad(WebDriver driver) {
+        ExpectedCondition<Boolean> pageLoadCondition = driver1 -> ((JavascriptExecutor) driver1).executeScript("return document.readyState").equals("complete");
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(pageLoadCondition);
+    }
+
 }

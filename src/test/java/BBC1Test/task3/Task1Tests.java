@@ -15,7 +15,7 @@ public class Task1Tests extends BaseTest {
     @Test
     public void ChecksTheNameOfTheHeadlineArticle() {
 
-        getHomePage().waitForPageLoadComplete(10);
+
         getHomePage().clickOnNewsButton();
         assertTrue(getNewsPage().getHeadTitleText().contains(HEAD_TITLE));
     }

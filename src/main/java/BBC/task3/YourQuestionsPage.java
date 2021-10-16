@@ -1,7 +1,5 @@
 package BBC.task3;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,10 +27,11 @@ public class YourQuestionsPage extends BasePage {
     private WebElement submitButton;
 
     @FindBy(xpath = "//div[@class='input-error-message']")
-    private List<WebElement> errorMessage;
+    private List<WebElement> listOfErrorMessages;
 
-    @FindBy(xpath = "//div[contains(text(),'Email')]")
-    private WebElement errorEmailMessage;
+    @FindBy(xpath = "//div[@class='input-error-message']")
+    private WebElement errorMessage;
+
 
     public void typeInQuestionField(final String message) {
         questionField.sendKeys(message);
@@ -55,15 +54,16 @@ public class YourQuestionsPage extends BasePage {
     }
 
     public boolean checkErrorMessage() {
-        return isElementPresented(errorMessage.get(0));
+        return isElementPresented(listOfErrorMessages.get(0));
     }
 
-    public boolean checkEmailErrorMessage() {
-        return isElementPresented(errorEmailMessage);
+    public int countNumberOfErrorMessages() {
+        return listOfErrorMessages.size();
     }
 
-    public int countNumberOfErrorMessages(){
-        return errorMessage.size();
+    public WebElement getErrorMessage() {
+        return errorMessage;
     }
+
 
 }

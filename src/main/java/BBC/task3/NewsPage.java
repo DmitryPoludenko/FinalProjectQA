@@ -39,8 +39,8 @@ public class NewsPage extends BasePage {
         coronaButton.click();
     }
 
-    public boolean checkPopUpWindow() {
-        return isElementPresented(popUpWindow);
+    public WebElement getPopUpWindow (){
+        return popUpWindow;
     }
 
     public void clickOnClosePopUpButton(){
