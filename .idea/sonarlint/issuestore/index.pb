@@ -11,5 +11,3 @@ C
 ,src/test/java/BBC2Test/task1/Task1Tests.java,6\7\67e5cb073eead714561e391e4aac1ef014ff00cf
 \
 ,src/test/java/BBC2Test/task2/Task2Tests.java,2\5\254fe23592845999540516f49e36f8f004b5dcb4
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec

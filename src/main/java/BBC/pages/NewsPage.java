@@ -1,4 +1,4 @@
-package BBC.task3;
+package BBC.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
