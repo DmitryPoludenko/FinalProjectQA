@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
@@ -44,6 +45,18 @@ public class DefinitionSteps {
         homePage.clickOnNewsButton();
     }
 
+    @And("User checks pop-up-window visibility")
+    public void userChecksPopUpWindowVisibility() {
+        newsPage = pageFactoryManager.getNewsPage();
+        newsPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, newsPage.getPopUpWindow());
+        //assertTrue(newsPage.isElementPresented(newsPage.getPopUpWindow()));
+    }
+
+    @And("User clicks on pop-up-window close button")
+    public void userClicksOnPopUpWindowCloseButton() {
+        newsPage.clickOnClosePopUpButton();
+    }
+
     @When("User gets the name of the head article")
     public String getTheNameOfHeadArticle() {
         newsPage = pageFactoryManager.getNewsPage();
@@ -62,17 +75,23 @@ public class DefinitionSteps {
         return newsPage.getHeadSecondaryTitlesList();
     }
 
-    @Then("User checks that the names of the secondary head articles equals hardcoded {string}")
-    public void checkTheNamesOfTheSecondaryHeadArticles(final String tempString) {
-        int count = 0;
-        for (WebElement element : getTheNamesOfTheSecondaryHeadArticles()) {
 
-            if (element.getText().contains(tempString)) {
-                count++;
-                assertTrue(element.getText().contains(tempString));
+    @Then("^User checks that the names of the secondary head articles equals hardcoded are here$")
+    public void checkTheNamesOfTheSecondaryHeadArticles(List<String> args) {
+
+        assertEquals(5, getTheNamesOfTheSecondaryHeadArticles().size());
+        int count = 0;
+        for (String tempString : args) {
+            for (WebElement element : getTheNamesOfTheSecondaryHeadArticles()) {
+                if (element.getText().contains(tempString)) {
+                    count++;
+                    assertTrue(element.getText().contains(tempString));
+                }
             }
-            assertEquals(1,count);
         }
+        assertEquals(getTheNamesOfTheSecondaryHeadArticles().size(), count);
     }
+
+
 }
 

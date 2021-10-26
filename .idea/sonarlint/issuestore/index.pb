@@ -11,3 +11,13 @@ C
 ,src/test/java/BBC2Test/task1/Task1Tests.java,6\7\67e5cb073eead714561e391e4aac1ef014ff00cf
 \
 ,src/test/java/BBC2Test/task2/Task2Tests.java,2\5\254fe23592845999540516f49e36f8f004b5dcb4
+Z
+*src/test/java/BBC1Test/task3/BaseTest.java,6\4\6410a49fd042aa0243959f748c12f576f87319cb
+Z
+*src/main/java/BBC/pages/BusinessLogic.java,b\a\ba87237e0f415fbc8975c138cfb6f6e0b4d6a456
+[
++src/main/java/BBC/pages/CoronaNewsPage.java,4\8\48cc33ea653bfef7164b3578e622ac14268a13ea
+Q
+!src/main/java/BBC/pages/Form.java,f\8\f88b390d5a520e6e2532ee9e7552ddf5951a79cb
+a
+1src/main/java/BBC/manager/PageFactoryManager.java,9\e\9e45abf3a9e2305edf54a73022adb32899fbb11d
