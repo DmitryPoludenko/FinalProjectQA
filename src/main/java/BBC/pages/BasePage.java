@@ -49,4 +49,7 @@ public class BasePage {
         wait.until(pageLoadCondition);
     }
 
+    public void refreshThePage() {
+        driver.navigate().refresh();
+    }
 }

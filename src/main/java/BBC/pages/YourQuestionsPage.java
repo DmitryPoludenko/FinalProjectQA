@@ -45,6 +45,13 @@ public class YourQuestionsPage extends BasePage {
         emailField.sendKeys(email);
     }
 
+    public void clearFields(){
+        questionField.clear();
+        nameField.clear();
+        emailField.clear();
+    }
+
+
     public void clickOnAcceptCheckbox() {
         acceptCheckbox.click();
     }
@@ -65,5 +72,17 @@ public class YourQuestionsPage extends BasePage {
         return errorMessage;
     }
 
+
+    public void submitYourQuestion(String question, String name, String email, boolean checkBox) {
+
+        typeInQuestionField(question);
+        typeInEmailField(email);
+        typeInNameField(name);
+        if (checkBox) {
+            clickOnAcceptCheckbox();
+        }
+
+        clickOnSubmitButton();
+    }
 
 }

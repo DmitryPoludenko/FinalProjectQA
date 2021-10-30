@@ -22,4 +22,6 @@ public class CoronaNewsPage extends BasePage{
     public void clickOnQuestionsButton(){
         questionsButton.click();
     }
+
+
 }

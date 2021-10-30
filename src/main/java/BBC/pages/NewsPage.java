@@ -47,4 +47,9 @@ public class NewsPage extends BasePage {
         closePopUpButton.click();
     }
 
+    public void waitForLoadAndClosePopUpWindow () {
+        waitVisibilityOfElement(5, getPopUpWindow());
+        clickOnClosePopUpButton();
+    }
+
 }
